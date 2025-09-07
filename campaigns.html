@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Boutique - Próximas Campañas y Novedades</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Variables de colores para el modo claro y oscuro */
+        :root {
+            --background-color: #ffffff;
+            --text-color: #333;
+            --secondary-text-color: #555;
+            --section-bg: #fdfafb;
+            --section-border: #ffe8ea;
+            --primary-color: #d84351;
+            --highlight-color: #f08080;
+        }
+
+        body.dark-mode {
+            --background-color: #1a1a1a;
+            --text-color: #f5f5f5;
+            --secondary-text-color: #cccccc;
+            --section-bg: #2c2c2c;
+            --section-border: #444444;
+            --primary-color: #e57373; /* Un rojo más claro para el modo oscuro */
+            --highlight-color: #ffb6c1; /* Un rosa más claro */
+        }
+        
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.4s, color 0.4s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-top: 60px;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--highlight-color);
+        }
+
+        /* Estilos específicos para las campañas */
+        .campaign-section {
+            background-color: var(--section-bg);
+            padding: 40px;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            border: 1px solid var(--section-border);
+            transition: background-color 0.4s, border-color 0.4s;
+        }
+
+        .campaign-section h3 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .campaign-section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: var(--highlight-color);
+        }
+
+        .campaign-section p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: var(--secondary-text-color);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        /* Estilos para el precio */
+        .campaign-products-grid .product-card p {
+            color: var(--highlight-color); 
+        }
+
+        /* El resto de tus estilos */
+        .campaign-section .launch-date {
+            font-weight: bold;
+            color: var(--secondary-text-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+            background-color: var(--background-color);
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid var(--section-border); /* Usamos la variable de borde general */
+            transition: background-color 0.4s, color 0.4s, border-color 0.4s;
+        }
+
+        .campaign-products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .campaign-products-grid .product-card {
+            border: 1px solid var(--section-border);
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s;
+            padding-bottom: 15px;
+            background-color: var(--background-color);
+        }
+
+        .campaign-products-grid .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .campaign-products-grid .product-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .campaign-products-grid .product-card h4 {
+            font-size: 1.2em;
+            margin: 0 10px 8px;
+            color: var(--text-color);
+            line-height: 1.3;
+        }
+        
+        .campaign-products-grid .product-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        /* Estilos del header y footer */
+        header {
+            background-color: var(--background-color);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--section-border);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: background-color 0.4s, border-color 0.4s;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--secondary-text-color);
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--highlight-color);
+        }
+
+        .header-icons a {
+            margin-left: 20px;
+            color: var(--secondary-text-color);
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+
+        .header-icons a:hover {
+            color: var(--highlight-color);
+        }
+        
+        /* Estilos del switch de tema */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+
+        .theme-switch {
+            display: inline-block;
+            height: 34px;
+            position: relative;
+            width: 60px;
+        }
+
+        .theme-switch input {
+            display: none;
+        }
+
+        .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            background-color: white;
+            bottom: 4px;
+            content: "";
+            height: 26px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 26px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* Estilos para los iconos de sol y luna */
+        .slider .light-icon, .slider .dark-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            line-height: 1;
+            transition: opacity 0.4s;
+        }
+        
+        .slider .light-icon {
+            left: 8px;
+            opacity: 1;
+            color: #f08080; /* Color durazno/rosa para el sol */
+        }
+        
+        .slider .dark-icon {
+           right: 8px;
+           opacity: 0;
+           color: #333; /* Cambiado a negro */
+       }
+
+       input:checked + .slider .light-icon {
+           opacity: 0;
+       }
+
+       input:checked + .slider .dark-icon {
+           opacity: 1;
+       }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+            transition: background-color 0.4s, color 0.4s;
+        }
+
+        body.dark-mode footer {
+            background-color: #111;
+            color: #eee;
+        }
+
+        footer .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-column h4 {
+            color: var(--highlight-color);
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .footer-column ul li a {
+            color: #bbb;
+        }
+
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 1.5em;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--highlight-color);
+        }
+
+        .newsletter-form input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            width: calc(100% - 100px);
+        }
+
+        .newsletter-form button {
+            background-color: var(--highlight-color);
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #bbb;
+        }
+
+        .logo img {
+            height: 100px;
+            width: auto;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="inicio.html">
+                    <img id="site-logo" src="img/logo.png" alt="Logo de Tu Boutique">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="inicio.html">Inicio</a></li>
+                    <li><a href="category.html">Tienda</a></li>
+                    <li><a href="campaigns.html">Próximas Campañas</a></li>
+                    <li><a href="about_us.html">Nosotros</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="fas fa-heart"></i></a>
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round">
+                            <i class="fas fa-sun light-icon"></i>
+                            <i class="fas fa-moon dark-icon"></i>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="container">
+            <h2 class="section-title">Descubre Nuestras Próximas Campañas y Colecciones</h2>
+            <p style="text-align: center; font-size: 1.1em; margin-bottom: 50px;">
+                Prepárate para las últimas tendencias y estilos exclusivos que están por llegar a Tu Boutique. ¡Sé la primera en conocerlos!
+            </p>
+
+            <div class="campaign-section">
+                <h3>Colección Verano Radiante: Destellos de Sol</h3>
+                <p>Sumérgete en la frescura y la vitalidad del verano con nuestra nueva colección. Prendas ligeras, colores vibrantes y estampados que evocan la alegría de la estación.</p>
+                <p class="launch-date">Lanzamiento estimado: 15 de agosto de 2025</p>
+                <div class="campaign-products-grid">
+                    <div class="product-card" data-id="201">
+                        <a href="#">
+                            <img src="img/vestido flor.jpg" alt="Vestido Fluido de Verano">
+                            <h4>Vestido Fluido Estampado Tropical</h4>
+                            <p>Precio: $65.00</p>
+                        </a>
+                    </div>
+                    <div class="product-card" data-id="202">
+                        <a href="#">
+                            <img src="img/shorts lino.jpg" alt="Shorts de Lino">
+                            <h4>Shorts de Lino Transpirables</h4>
+                            <p>Precio: $38.00</p>
+                        </a>
+                    </div>
+                    <div class="product-card" data-id="203">
+                        <a href="#">
+                            <img src="img/blusa hombros.jpg" alt="Blusa Hombros al Aire">
+                            <h4>Blusa de Hombros Descubiertos</h4>
+                            <p>Precio: $42.00</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="campaign-section">
+                <h3>Elegancia Otoñal: Abrígate con Estilo</h3>
+                <p>La temporada más sofisticada del año llega con texturas ricas, tonos tierra y siluetas que realzan tu figura. Descubre abrigos, suéteres y accesorios imprescindibles para el otoño.</p>
+                <p class="launch-date">Lanzamiento estimado: 1 de octubre de 2025</p>
+                <div class="campaign-products-grid">
+                    <div class="product-card" data-id="204">
+                        <a href="#">
+                            <img src="img/gabardina.jpg" alt="Gabardina Clásica">
+                            <h4>Gabardina Clásica Impermeable</h4>
+                            <p>Precio: $120.00</p>
+                        </a>
+                    </div>
+                    <div class="product-card" data-id="205">
+                        <a href="#">
+                            <img src="img/jersey.jpg" alt="Jersey de Cashmere">
+                            <h4>Jersey de Cashmere Suave</h4>
+                            <p>Precio: $89.00</p>
+                        </a>
+                    </div>
+                    <div class="product-card" data-id="206">
+                        <a href="#">
+                            <img src="img/botas cuero.jpg" alt="Botas Altas de Cuero">
+                            <h4>Botas de Cuero de Caña Alta</h4>
+                            <p>Precio: $99.00</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="campaign-section">
+                <h3>Destellos de Invierno: Brilla en la Nieve</h3>
+                <p>Prepara tu guardarropa para el frío con nuestra selección de prendas cálidas y elegantes. Desde abrigos de plumas hasta vestidos de fiesta para las celebraciones de fin de año.</p>
+                <p class="launch-date">Lanzamiento estimado: 15 de noviembre de 2025</p>
+                <div class="campaign-products-grid">
+                    <div class="product-card" data-id="207">
+                        <a href="#">
+                            <img src="img/abrigo pelo.jpg" alt="Abrigo de Pelo Sintético">
+                            <h4>Abrigo de Pelo Sintético Lujo</h4>
+                            <p>Precio: $150.00</p>
+                        </a>
+                    </div>
+                    <div class="product-card" data-id="208">
+                        <a href="#">
+                            <img src="img/vestido terciopelo.jpg" alt="Vestido de Terciopelo">
+                            <h4>Vestido de Terciopelo Noche</h4>
+                            <p>Precio: $75.00</p>
+                        </a>
+                    </div>
+                    <div class="product-card" data-id="209">
+                        <a href="#">
+                            <img src="img/bufanda.jpg" alt="Bufanda de Cashmere Pura">
+                            <h4>Bufanda de Cashmere Pura</h4>
+                            <p>Precio: $49.00</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <p style="text-align: center; font-size: 1.1em; margin-top: 50px;">
+                ¡Mantente atenta a nuestras redes sociales para los anuncios oficiales y ofertas especiales!
+            </p>
+
+        </section>
+    </main>
+
+      <footer>
+    <div class="container">
+        <div class="footer-column">
+            <h4>Tu Boutique</h4>
+            <ul>
+                <li><a href="#">Nosotros</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Tiendas Físicas</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+    <h4>Atención al Cliente</h4>
+    <ul>
+        <li><a href="#">Contacto</a></li>
+        <li><a href="#">Preguntas Frecuentes</a></li>
+        <li><a href="#">Envíos</a></li>
+        <li><a href="#">Devoluciones y Cambios</a></li>
+    </ul>
+    <a href="paginaslegales.html" class="btn-legal">Páginas Legales</a>
+</div>
+        <div class="footer-column">
+            <h4>Síguenos</h4>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Newsletter</h4>
+            <p>Suscríbete para ofertas y novedades.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Tu correo electrónico">
+                <button type="submit">Suscribir</button>
+            </form>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2025 Tu Boutique. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+    <script src="js/script.js" defer></script> 
+</body>
+</html>

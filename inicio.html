@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nombre de tu Boutique - Moda Exclusiva</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos específicos de la página de inicio */
+        .hero-section {
+            background: url('img/base.jpg') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .product-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding-bottom: 15px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .product-card h3 {
+            font-size: 1.3em;
+            margin: 0 10px 10px;
+            color: #333;
+        }
+
+        .product-card p {
+            font-size: 1.1em;
+            color: #f08080;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-card .btn-primary {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 0.9em;
+        }
+        
+        /* Asegura que el enlace que envuelve la imagen y texto no tenga subrayado */
+        .product-card a {
+            text-decoration: none; 
+            color: inherit; /* Hereda el color para que el texto no se vea como un enlace */
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-top: 60px;
+            margin-bottom: 40px;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #f08080;
+        }
+
+        /* Estilos para el logo de la cabecera */
+        .logo img {
+            height: 100px; /* Ajusta la altura de tu logo según sea necesario */
+            width: auto; /* Mantiene la proporción de la imagen */
+            vertical-align: middle; /* Alinea la imagen verticalmente con el texto si hubiera */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="inicio.html">
+                    <img id="site-logo" src="img/logo.png" alt="Logo de Tu Boutique">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="inicio.html">Inicio</a></li>
+                    <li><a href="category.html">Tienda</a></li>
+                    <li><a href="campaigns.html">Próximas Campañas</a></li>
+                    <li><a href="about_us.html">Nosotros</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="fas fa-heart"></i></a>
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+                </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Tu Estilo, Tu Historia</h1>
+                <p>Descubre las últimas tendencias en moda femenina. ¡Envío gratis en todos los pedidos!</p>
+                <a href="category.html" class="btn-primary">Explorar Tienda</a>
+            </div>
+        </section>
+
+        <section class="container">
+            <h2 class="section-title">Próximas Campañas</h2>
+            <div class="product-grid">
+                <div class="product-card" data-id="101">
+                    <img src="img/vestido floral.jpg" alt="Vestido de Flores">
+                    <h3>Vestido Floral Veraniego</h3>
+                    <p>Lanzamiento: 01/08/2025</p>
+                </div>
+
+                <div class="product-card" data-id="102">
+                    <img src="img/blusa.jpg" alt="Blusa de Seda">
+                    <h3>Blusa Elegante de Seda</h3>
+                    <p>Lanzamiento: 15/08/2025</p>
+                </div>
+
+                <div class="product-card" data-id="103">
+                    <img src="img/jean.jpg" alt="Pantalón Jean"> 
+                    <h3>Jean Ajustado Clásico</h3>
+                    <p>Lanzamiento: 01/09/2025</p>
+                </div>
+
+                <div class="product-card" data-id="104">
+                    <img src="img/falda.jpg" alt="Falda Plisada"> 
+                    <h3>Falda Plisada Midi</h3>
+                    <p>Lanzamiento: 15/09/2025</p>
+                </div>
+
+                <div class="product-card" data-id="105">
+                    <img src="img/abrigo.jpg" alt="Abrigo de Otoño"> 
+                    <h3>Abrigo de Lana Premium</h3>
+                    <p>Lanzamiento: 01/10/2025</p>
+                </div>
+
+                <div class="product-card" data-id="106">
+                    <img src="img/botas.jpg" alt="Botas de Invierno"> 
+                    <h3>Botines de Cuero Estilo Casual</h3>
+                    <p>Lanzamiento: 15/10/2025</p>
+                </div>
+
+                <div class="product-card" data-id="107">
+                    <img src="img/sueter2.jpg" alt="Suéter Trenzado"> 
+                    <h3>Suéter Tejido Artesanal</h3>
+                    <p>Lanzamiento: 01/11/2025</p>
+                </div>
+
+                <div class="product-card" data-id="108">
+                    <img src="img/vestido.jpg" alt="Vestido de Fiesta"> 
+                    <h3>Vestido de Noche Elegante</h3>
+                    <p>Lanzamiento: 15/11/2025</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <h2 class="section-title">Categorías Destacadas</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="img/vestidos.jpg" alt="Categoría Vestidos">
+                    <h3>Vestidos</h3>
+                    <p>Elegancia para cada ocasión</p>
+                    <a href="category.html?category=Vestidos" class="btn-primary">Ver Más</a>
+                </div>
+                <div class="product-card">
+                    <img src="img/tops.jpg" alt="Categoría Tops">
+                    <h3>Tops</h3>
+                    <p>Combina tu estilo</p>
+                    <a href="category.html?category=Tops" class="btn-primary">Ver Más</a>
+                </div>
+                <div class="product-card">
+                    <img src="img/accesorios.jpg" alt="Categoría Accesorios">
+                    <h3>Accesorios</h3>
+                    <p>El toque final perfecto</p>
+                    <a href="category.html?category=Accesorios" class="btn-primary">Ver Más</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+    <div class="container">
+        <div class="footer-column">
+            <h4>Tu Boutique</h4>
+            <ul>
+                <li><a href="#">Nosotros</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Tiendas Físicas</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+    <h4>Atención al Cliente</h4>
+    <ul>
+        <li><a href="#">Contacto</a></li>
+        <li><a href="#">Preguntas Frecuentes</a></li>
+        <li><a href="#">Envíos</a></li>
+        <li><a href="#">Devoluciones y Cambios</a></li>
+    </ul>
+    <a href="paginaslegales.html" class="btn-legal">Páginas Legales</a>
+</div>
+        <div class="footer-column">
+            <h4>Síguenos</h4>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Newsletter</h4>
+            <p>Suscríbete para ofertas y novedades.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Tu correo electrónico">
+                <button type="submit">Suscribir</button>
+            </form>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2025 Tu Boutique. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+    <script src="js/script.js" defer></script> 
+</body>
+</html>

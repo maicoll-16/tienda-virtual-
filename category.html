@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categoría de Productos - Tu Boutique</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo a {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #f08080;
+            text-decoration: none;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 30px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #f08080;
+        }
+        .header-icons a {
+            color: #555;
+            margin-left: 20px;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+        .header-icons a:hover {
+            color: #f08080;
+        }
+
+        .hero-banner {
+            background-color: #f08080;
+            color: #fff;
+            text-align: center;
+            padding: 60px 20px;
+            margin-bottom: 40px;
+        }
+        .hero-banner h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        .hero-banner p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .filters-sort {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .filters-sort select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .filter-buttons button {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+        .filter-buttons button.active,
+        .filter-buttons button:hover {
+            background-color: #f08080;
+            color: #fff;
+            border-color: #f08080;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding-bottom: 50px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Añadido para que toda la tarjeta sea cliqueable */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .product-card > a { /* Estilos para el enlace que envuelve el producto */
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Asegura que el enlace ocupe toda la tarjeta */
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 350px; /* Altura fija para las imágenes */
+            object-fit: cover; /* Asegura que las imágenes cubran el área sin distorsionarse */
+            display: block;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product-card h3 {
+            font-size: 1.3em;
+            margin: 15px 10px 8px;
+            color: #333;
+        }
+
+        .product-card p {
+            font-size: 1.1em;
+            color: #f08080;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-card .btn-primary {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f08080;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: auto; /* Empuja el botón hacia abajo */
+        }
+
+        .product-card .btn-primary:hover {
+            background-color: #e96363;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            margin-bottom: 60px;
+        }
+        .pagination button {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .pagination button.active,
+        .pagination button:hover {
+            background-color: #f08080;
+            color: #fff;
+            border-color: #f08080;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+            font-size: 0.9em;
+        }
+        footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+        .footer-column h4 {
+            font-size: 1.2em;
+            color: #f08080;
+            margin-bottom: 15px;
+        }
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        .social-icons a {
+            color: #fff;
+            font-size: 1.5em;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: #f08080;
+        }
+        .newsletter-form {
+            display: flex;
+            margin-top: 10px;
+        }
+        .newsletter-form input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+            width: 70%;
+        }
+        .newsletter-form button {
+            padding: 10px 15px;
+            background-color: #f08080;
+            color: #fff;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .newsletter-form button:hover {
+            background-color: #e96363;
+        }
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #555;
+            padding-top: 20px;
+            margin-top: 30px;
+            color: #ccc;
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav ul li {
+                margin: 0 15px 10px;
+            }
+            .header-icons {
+                margin-top: 15px;
+            }
+            .hero-banner h1 {
+                font-size: 2.5em;
+            }
+            .hero-banner p {
+                font-size: 1em;
+            }
+            .filters-sort {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filters-sort select,
+            .filter-buttons {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .filter-buttons button {
+                width: calc(33% - 10px); /* Ejemplo para 3 botones */
+                margin-right: 5px;
+                margin-bottom: 10px;
+            }
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            footer .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-column {
+                min-width: unset;
+                width: 100%;
+            }
+            .newsletter-form {
+                justify-content: center;
+            }
+            .newsletter-form input,
+            .newsletter-form button {
+                width: auto;
+            }
+        }
+        /* Estilos para el logo de la cabecera */
+        .logo img {
+            height: 100px; /* Ajusta la altura de tu logo según sea necesario */
+            width: auto; /* Mantiene la proporción de la imagen */
+            vertical-align: middle; /* Alinea la imagen verticalmente con el texto si hubiera */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="inicio.html">
+                    <img id="site-logo" src="img/logo.png" alt="Logo de Tu Boutique">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="inicio.html">Inicio</a></li>
+                    <li><a href="category.html">Tienda</a></li>
+                    <li><a href="campaigns.html">Próximas Campañas</a></li>
+                    <li><a href="about_us.html">Nosotros</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="fas fa-heart"></i></a>
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+                </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-banner">
+            <div class="container">
+                <h1>Nuestra Colección</h1>
+                <p>Descubre las últimas tendencias en moda femenina.</p>
+            </div>
+        </section>
+
+        <section class="products-section container">
+            <div class="filters-sort">
+                <div class="filter-buttons" id="filter-buttons">
+                    <button class="active" data-category="all">Todos</button>
+                    <button data-category="vestidos">Vestidos</button>
+                    <button data-category="blusas">Blusas</button>
+                    <button data-category="pantalones">Pantalones</button>
+                    <button data-category="chaquetas">Chaquetas</button>
+                    <button data-category="faldas">Faldas</button>
+                    <button data-category="tops">Tops</button>
+                </div>
+                <div class="sort-by">
+                    <label for="sort-selector">Ordenar por:</label>
+                    <select id="sort-selector">
+                        <option value="default">Relevancia</option>
+                        <option value="price-asc">Precio: Menor a Mayor</option>
+                        <option value="price-desc">Precio: Mayor a Menor</option>
+                        <option value="name-asc">Nombre: A-Z</option>
+                        <option value="name-desc">Nombre: Z-A</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="product-grid" id="product-grid">
+                </div>
+
+            <div class="pagination" id="pagination">
+                </div>
+        </section>
+    </main>
+
+      <footer>
+    <div class="container">
+        <div class="footer-column">
+            <h4>Tu Boutique</h4>
+            <ul>
+                <li><a href="#">Nosotros</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Tiendas Físicas</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+    <h4>Atención al Cliente</h4>
+    <ul>
+        <li><a href="#">Contacto</a></li>
+        <li><a href="#">Preguntas Frecuentes</a></li>
+        <li><a href="#">Envíos</a></li>
+        <li><a href="#">Devoluciones y Cambios</a></li>
+    </ul>
+    <a href="paginaslegales.html" class="btn-legal">Páginas Legales</a>
+</div>
+        <div class="footer-column">
+            <h4>Síguenos</h4>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Newsletter</h4>
+            <p>Suscríbete para ofertas y novedades.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Tu correo electrónico">
+                <button type="submit">Suscribir</button>
+            </form>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2025 Tu Boutique. Todos los derechos reservados.</p>
+    </div>
+</footer>
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const productGrid = document.getElementById('product-grid');
+            const filterButtons = document.getElementById('filter-buttons');
+            const sortSelector = document.getElementById('sort-selector');
+            const paginationContainer = document.getElementById('pagination');
+
+            const productsPerPage = 6;
+            let currentPage = 1;
+            let currentCategory = 'all';
+            let currentSort = 'default';
+
+            const allProducts = [
+                {
+                    id: '1',
+                    name: 'Vestido Casual de Rayas',
+                    price: 49.99,
+                    category: 'vestidos',
+                    image: 'img/vestido lineas.jpg',
+                    description: 'Un vestido elegante y cómodo con un diseño de rayas clásico. Ideal para el uso diario o para una salida casual. Fabricado con tela suave y transpirable para máxima comodidad.',
+                    sizes: [
+                        { size: 'XS', inStock: true },
+                        { size: 'S', inStock: true },
+                        { size: 'M', inStock: true },
+                        { size: 'L', inStock: false },
+                        { size: 'XL', inStock: true }
+                    ]
+                },
+                {
+                    id: '2',
+                    name: 'Blusa de Seda Floral',
+                    price: 35.50,
+                    category: 'blusas',
+                    image: 'img/blusa ceda1.jpg',
+                    description: 'Blusa ligera y fluida con un hermoso estampado floral. Perfecta para añadir un toque de elegancia a tu atuendo de primavera o verano. Confeccionada en seda de alta calidad para un tacto suave.',
+                    sizes: [
+                        { size: 'S', inStock: true },
+                        { size: 'M', inStock: false },
+                        { size: 'L', inStock: true }
+                    ]
+                },
+                {
+                    id: '3',
+                    name: 'Pantalón de Lino',
+                    price: 59.00,
+                    category: 'pantalones',
+                    image: 'img/pantalon lino.jpg',
+                    description: 'Pantalón fresco y versátil, ideal para el verano. Su tejido de lino natural lo hace transpirable y cómodo, perfecto para climas cálidos. Combínalo con blusas o tops para un look relajado.',
+                    sizes: [
+                        { size: 'S', inStock: true },
+                        { size: 'M', inStock: true },
+                        { size: 'L', inStock: true },
+                        { size: 'XL', inStock: false }
+                    ]
+                },
+                {
+                    id: '4',
+                    name: 'Chaqueta de Mezclilla',
+                    price: 75.00,
+                    category: 'chaquetas',
+                    image: 'img/chaqueta.jpg',
+                    description: 'Clásica chaqueta de mezclilla con un corte moderno. Un básico imprescindible en cualquier armario, perfecta para todas las estaciones. Duradera y cómoda, ideal para un estilo casual.',
+                    sizes: [
+                        { size: 'S', inStock: true },
+                        { size: 'M', inStock: true },
+                        { size: 'L', inStock: true }
+                    ]
+                },
+                {
+                    id: '5',
+                    name: 'Falda Midi Plisada',
+                    price: 45.00,
+                    category: 'faldas',
+                    image: 'img/falda.jpg',
+                    description: 'Falda elegante y fluida con plisado suave, que ofrece un movimiento hermoso. Ideal para un look sofisticado de día o de noche. Combina bien con tacones o zapatillas.',
+                    sizes: [
+                        { size: 'XS', inStock: true },
+                        { size: 'S', inStock: true },
+                        { size: 'M', inStock: true }
+                    ]
+                },
+                {
+                    id: '6',
+                    name: 'Top Básico de Algodón',
+                    price: 20.00,
+                    category: 'tops',
+                    image: 'img/top algodon.jpg',
+                    description: 'Top suave y cómodo de algodón puro, ideal para el día a día. Su diseño básico lo hace perfecto para combinar con cualquier prenda. Disponible en varios colores.',
+                    sizes: [
+                        { size: 'S', inStock: true },
+                        { size: 'M', inStock: true },
+                        { size: 'L', inStock: true }
+                    ]
+                },
+                {
+                    id: '7',
+                    name: 'Suéter de Lana',
+                    price: 65.00,
+                    category: 'chaquetas',
+                    image: 'img/sueter2.jpg',
+                    description: 'Suéter cálido y acogedor de lana suave, ideal para los días fríos. Diseño clásico que combina con todo. Un imprescindible para tu armario de invierno.',
+                    sizes: [
+                        { size: 'S', inStock: true },
+                        { size: 'M', inStock: true },
+                        { size: 'L', inStock: true },
+                        { size: 'XL', inStock: true }
+                    ]
+                },
+                {
+                    id: '8',
+                    name: 'Vestido Floral Veraniego',
+                    price: 55.00,
+                    category: 'vestidos',
+                    image: 'img/vestido floral.jpg',
+                    description: 'Vestido ligero y fresco con un vibrante estampado floral, perfecto para el verano. Confeccionado con tejido transpirable para mayor confort en climas cálidos.',
+                    sizes: [
+                        { size: 'XS', inStock: true },
+                        { size: 'S', inStock: true },
+                        { size: 'M', inStock: false },
+                        { size: 'L', inStock: true }
+                    ]
+                },
+                {
+                    id: '9',
+                    name: 'Jeans Slim Fit',
+                    price: 70.00,
+                    category: 'pantalones',
+                    image: 'img/jean.jpg',
+                    description: 'Jeans de corte slim fit, cómodos y con un ajuste perfecto. Ideales para un look casual o semi-formal. Confeccionados con mezclilla de alta calidad y duradera.',
+                    sizes: [
+                        { size: '28', inStock: true },
+                        { size: '30', inStock: true },
+                        { size: '32', inStock: true },
+                        { size: '34', inStock: false }
+                    ]
+                }
+            ];
+
+            function filterProducts(category) {
+                currentCategory = category;
+                currentPage = 1; // Reset to first page on filter change
+                updateProducts();
+            }
+
+            function sortProducts(products) {
+                switch (currentSort) {
+                    case 'price-asc':
+                        return products.sort((a, b) => a.price - b.price);
+                    case 'price-desc':
+                        return products.sort((a, b) => b.price - a.price);
+                    case 'name-asc':
+                        return products.sort((a, b) => a.name.localeCompare(b.name));
+                    case 'name-desc':
+                        return products.sort((a, b) => b.name.localeCompare(a.name));
+                    case 'default':
+                    default:
+                        return products; // Maintain original order or a default
+                }
+            }
+
+            function renderProducts() {
+                productGrid.innerHTML = ''; // Clear current products
+
+                let filteredProducts = allProducts;
+                if (currentCategory !== 'all') {
+                    filteredProducts = allProducts.filter(product => product.category === currentCategory);
+                }
+
+                const sortedProducts = sortProducts([...filteredProducts]); // Sort a copy
+
+                const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
+                const startIndex = (currentPage - 1) * productsPerPage;
+                const endIndex = startIndex + productsPerPage;
+                const productsToDisplay = sortedProducts.slice(startIndex, endIndex);
+
+                if (productsToDisplay.length === 0) {
+                    productGrid.innerHTML = '<p style="text-align: center; width: 100%; color: #777;">No hay productos disponibles en esta categoría.</p>';
+                    paginationContainer.innerHTML = '';
+                    return;
+                }
+
+                productsToDisplay.forEach(product => {
+                    const productCardHTML = `
+                        <div class="product-card">
+                            <a href="product_detail.html?id=${product.id}">
+                                <img src="${product.image}" alt="${product.name}">
+                                <h3>${product.name}</h3>
+                                <p>$${product.price.toFixed(2)}</p>
+                                <span class="btn-primary">Ver Producto</span>
+                            </a>
+                        </div>
+                    `;
+                    productGrid.insertAdjacentHTML('beforeend', productCardHTML);
+                });
+
+                renderPagination(totalPages);
+            }
+
+            function renderPagination(totalPages) {
+                paginationContainer.innerHTML = '';
+                for (let i = 1; i <= totalPages; i++) {
+                    const button = document.createElement('button');
+                    button.textContent = i;
+                    button.classList.add('page-number');
+                    if (i === currentPage) {
+                        button.classList.add('active');
+                    }
+                    button.addEventListener('click', () => {
+                        currentPage = i;
+                        updateProducts();
+                    });
+                    paginationContainer.appendChild(button);
+                }
+            }
+
+            function updateProducts() {
+                renderProducts();
+            }
+
+            // Event Listeners for filters
+            filterButtons.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    // Remove active class from all buttons
+                    filterButtons.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    e.target.classList.add('active');
+                    filterProducts(e.target.dataset.category);
+                }
+            });
+
+            // Event Listener for sort selector
+            sortSelector.addEventListener('change', (e) => {
+                currentSort = e.target.value;
+                currentPage = 1; // Reset to first page on sort change
+                updateProducts();
+            });
+
+            // Initial render
+            updateProducts();
+        });
+    </script>
+</body>
+</html>

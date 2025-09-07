@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - Tu Boutique</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos para el logo de la cabecera */
+        .logo img {
+            height: 100px; /* Ajusta la altura de tu logo según sea necesario */
+            width: auto; /* Mantiene la proporción de la imagen */
+            vertical-align: middle; /* Alinea la imagen verticalmente con el texto si hubiera */
+        }
+        /* Estilos generales para esta página */
+        body {
+            font-family: 'Montserrat', sans-serif; /* Fuente ligeramente más moderna */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #333;
+            /* --- FONDO DE IMAGEN APLICADO AQUÍ --- */
+            background-image: url('img/fondo4.png'); /* Placeholder: Reemplaza con tu URL de imagen */
+            background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+            background-attachment: fixed; /* Hace que la imagen de fondo se quede fija al hacer scroll */
+            background-position: center center; /* Centra la imagen de fondo */
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+            transition: background-image 0.5s ease-in-out; /* Transición suave al cambiar la imagen */
+            /* --- FIN DEL FONDO DE IMAGEN --- */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Estilos del header y footer (reutilizados del index) */
+        header {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #d84351;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #f08080;
+        }
+
+        .header-icons a {
+            margin-left: 20px;
+            color: #555;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+
+        .header-icons a:hover {
+            color: #f08080;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+
+        footer .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-column h4 {
+            color: #f08080;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 1.5em;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #f08080;
+        }
+
+        .newsletter-form input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            width: calc(100% - 100px);
+        }
+
+        .newsletter-form button {
+            background-color: #f08080;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #d84351;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #bbb;
+        }
+
+        /* Estilos específicos de la página Nosotros (Mejorados) */
+        .about-hero-banner {
+            background: url('https://via.placeholder.com/1920x300/f0f0f0/333?text=Tu+Estilo%2C+Nuestra+Pasi%C3%B3n') no-repeat center center/cover;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .about-hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+
+        .about-hero-banner h1 {
+            font-size: 3.8em;
+            margin: 0;
+            z-index: 2;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+        }
+
+        .about-section {
+            padding: 20px 0 60px; /* Reducir padding superior, mantener inferior */
+            text-align: center;
+        }
+
+        .about-intro {
+            background-color: #fff; /* Blanco puro para el contenedor */
+            padding: 50px;
+            margin-bottom: 60px; /* Más espacio inferior */
+            border-radius: 12px; /* Bordes más redondeados */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1); /* Sombra más pronunciada */
+            border: none; /* Eliminar el borde sutil si el shadow es suficiente */
+            animation: fadeIn 1s ease-out; /* Animación de entrada */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .about-intro h2 { /* Cambiado de h1 a h2 para la jerarquía de títulos */
+            font-size: 2.8em;
+            color: #d84351;
+            margin-bottom: 25px; /* Más espacio */
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .about-intro h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #f08080;
+        }
+
+        .about-intro p {
+            font-size: 1.15em; /* Ligeramente más grande */
+            line-height: 1.7;
+            color: #444; /* Color de texto más oscuro para mejor legibilidad */
+            max-width: 850px; /* Ancho máximo para el texto */
+            margin: 0 auto 15px;
+        }
+        
+        /* Estilos para el nuevo botón */
+        #cambiarFondoBtn {
+            background-color: #555;
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        #cambiarFondoBtn:hover {
+            background-color: #777;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .vision-mission-values {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 35px; /* Más espacio entre tarjetas */
+            margin-top: 60px; /* Más espacio superior */
+            margin-bottom: 60px;
+        }
+
+        .vmv-card {
+            flex: 1;
+            min-width: 280px;
+            max-width: 360px; /* Ligeramente más ancho */
+            background-color: #fff;
+            padding: 35px; /* Más padding */
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08); /* Sombra mejorada */
+            border: none; /* Eliminar borde si el shadow es suficiente */
+            transition: transform 0.4s ease, box-shadow 0.4s ease; /* Transición más suave */
+        }
+
+        .vmv-card:hover {
+            transform: translateY(-10px) scale(1.02); /* Efecto más pronunciado */
+            box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+        }
+
+        .vmv-card i {
+            font-size: 3em; /* Iconos más grandes */
+            color: #f08080;
+            margin-bottom: 25px; /* Más espacio */
+            transition: color 0.3s ease;
+        }
+
+        .vmv-card:hover i {
+            color: #d84351; /* Cambiar color del icono al pasar el ratón */
+        }
+
+        .vmv-card h3 {
+            font-size: 1.9em; /* Título de tarjeta más grande */
+            color: #d84351;
+            margin-bottom: 18px;
+        }
+
+        .vmv-card p {
+            font-size: 1.05em; /* Texto de tarjeta ligeramente más grande */
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .team-button-section {
+            text-align: center;
+            margin-top: 70px;
+            margin-bottom: 80px; /* Más espacio antes del footer */
+        }
+
+        .team-button {
+            background-color: #d84351;
+            color: #fff;
+            padding: 18px 35px; /* Más padding para un botón más grande */
+            border: none;
+            border-radius: 8px; /* Bordes más redondeados */
+            font-size: 1.3em; /* Fuente más grande */
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Sombra inicial */
+        }
+
+        .team-button:hover {
+            background-color: #f08080;
+            transform: translateY(-5px); /* Efecto de "levantar" más pronunciado */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25); /* Sombra más grande al pasar el ratón */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .about-hero-banner h1 {
+                font-size: 3em;
+            }
+            .about-intro h2 {
+                font-size: 2.2em;
+            }
+            .about-intro p {
+                font-size: 1.05em;
+            }
+            .vmv-card {
+                max-width: 45%; /* Dos columnas en tablets */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-hero-banner {
+                height: 200px;
+                margin-bottom: 30px;
+            }
+            .about-hero-banner h1 {
+                font-size: 2.5em;
+            }
+            .about-intro {
+                padding: 30px;
+                margin-bottom: 40px;
+            }
+            .about-intro h2 {
+                font-size: 2em;
+            }
+            .vision-mission-values {
+                flex-direction: column;
+                align-items: center;
+                gap: 25px;
+                margin-top: 40px;
+            }
+            .vmv-card {
+                max-width: 90%;
+            }
+            .team-button {
+                font-size: 1.1em;
+                padding: 12px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="inicio.html">
+                    <img id="site-logo" src="img/logo.png" alt="Logo de Tu Boutique">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="inicio.html">Inicio</a></li>
+                    <li><a href="category.html">Tienda</a></li>
+                    <li><a href="campaigns.html">Próximas Campañas</a></li>
+                    <li><a href="about_us.html">Nosotros</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="fas fa-heart"></i></a>
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-hero-banner">
+            <h1>Sobre Nosotros</h1>
+        </section>
+
+        <section class="about-section">
+            <div class="container">
+                <div class="about-intro">
+                    <h2>Bienvenida a A Boutique: Nuestra Historia</h2>
+                    <p>
+                        Desde 2025 , Tu Boutique ha sido un faro de estilo y una pasión inquebrantable por la moda femenina en Cúcuta. Nacimos con la visión de ofrecer a cada mujer prendas que no solo adornen su cuerpo, sino que también realcen su confianza y expresen su singularidad. Creemos firmemente que la ropa es mucho más que tela; es una extensión de la personalidad, una forma de arte que cuenta historias.
+                    </p>
+                    <p>
+                        Nos dedicamos con esmero a la curación de cada colección, seleccionando piezas que encapsulan las últimas tendencias, desde lo casual-chic hasta la elegancia más sofisticada. Nuestro compromiso es brindarte calidad, comodidad y durabilidad, asegurando que cada prenda se convierta en una joya en tu guardarropa. Gracias por ser el corazón de nuestra inspiración y por permitirnos ser parte de tu viaje de estilo.
+                    </p>
+                    <button id="cambiarFondoBtn">Cambiar Fondo</button>
+                </div>
+
+                <div class="vision-mission-values">
+                    <div class="vmv-card">
+                        <i class="fas fa-bullseye"></i>
+                        <h3>Nuestra Misión</h3>
+                        <p>
+                            Empoderar a las mujeres a través de la moda, ofreciendo una selección exclusiva de prendas de alta calidad y diseño innovador, complementadas con una experiencia de compra personalizada y excepcional. Buscamos inspirar confianza y ayudar a cada clienta a definir y celebrar su estilo auténtico.
+                        </p>
+                    </div>
+
+                    <div class="vmv-card">
+                        <i class="fas fa-eye"></i>
+                        <h3>Nuestra Visión</h3>
+                        <p>
+                            Convertirnos en la boutique de referencia en Cúcuta y la región, reconocidas por nuestra vanguardia en moda, nuestro inquebrantable compromiso con la calidad y la sostenibilidad, y por construir una comunidad de mujeres inspiradas y seguras de sí mismas.
+                        </p>
+                    </div>
+
+                    <div class="vmv-card">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <h3>Nuestros Valores</h3>
+                        <p>
+                            Pasión y Creatividad: Amor por la moda, la innovación y la belleza en cada detalle.<br>
+                            Calidad y Excelencia: Compromiso con productos superiores y un servicio impecable.<br>
+                            Autenticidad e Inclusión: Celebramos la individualidad y la diversidad.<br>
+                            Integridad y Transparencia: Actuamos con honestidad y ética en todo momento.<br>
+                            Atención al Cliente: Ponemos a nuestras clientas en el centro de todo lo que hacemos.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="team-button-section">
+                    <a href="Portafolio/equipo.html" class="team-button" target="_blank" rel="noopener noreferrer">Conoce a Mi Equipo</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+      <footer>
+    <div class="container">
+        <div class="footer-column">
+            <h4>Tu Boutique</h4>
+            <ul>
+                <li><a href="#">Nosotros</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Tiendas Físicas</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+    <h4>Atención al Cliente</h4>
+    <ul>
+        <li><a href="#">Contacto</a></li>
+        <li><a href="#">Preguntas Frecuentes</a></li>
+        <li><a href="#">Envíos</a></li>
+        <li><a href="#">Devoluciones y Cambios</a></li>
+    </ul>
+    <a href="paginaslegales.html" class="btn-legal">Páginas Legales</a>
+</div>
+        <div class="footer-column">
+            <h4>Síguenos</h4>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Newsletter</h4>
+            <p>Suscríbete para ofertas y novedades.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Tu correo electrónico">
+                <button type="submit">Suscribir</button>
+            </form>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2025 Tu Boutique. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+    <script src="js/script.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cambiarFondoBtn = document.getElementById('cambiarFondoBtn');
+            const body = document.body;
+            
+            // Reemplaza estas rutas con las rutas reales de tus imágenes
+            const imagenesFondo = [
+                'img/fondo4.png',
+                'img/cambio1.png',
+                'img/cambio2.png',
+                'img/cambio3.png'
+            ];
+
+            let indiceActual = 0;
+
+            function cambiarFondo() {
+                // Incrementa el índice y vuelve a 0 si supera el tamaño del array
+                indiceActual = (indiceActual + 1) % imagenesFondo.length;
+                
+                // Cambia la imagen de fondo del body
+                body.style.backgroundImage = `url('${imagenesFondo[indiceActual]}')`;
+            }
+
+            cambiarFondoBtn.addEventListener('click', cambiarFondo);
+        });
+    </script>
+</body>
+</html>

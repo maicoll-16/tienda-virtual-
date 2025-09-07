@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Producto - Tu Boutique</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Estilos para el logo de la cabecera */
+        .logo img {
+            height: 100px; /* Ajusta la altura de tu logo según sea necesario */
+            width: auto; /* Mantiene la proporción de la imagen */
+            vertical-align: middle; /* Alinea la imagen verticalmente con el texto si hubiera */
+        }
+        /* Estilos generales (mantener consistencia con category.html) */
+        /* ----- ESTILOS ADICIONALES PARA EL SLIDER ----- */
+.slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Oculta las imágenes que están fuera de vista */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background-color: #f8f8f8;
+}
+
+.slider-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* Animación de desplazamiento */
+}
+
+.slider-images img {
+    width: 100%; /* Cada imagen ocupa el 100% del contenedor del slider */
+    height: 500px; /* Altura fija para todas las imágenes del slider */
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+    flex-shrink: 0; /* Evita que las imágenes se encojan */
+    border-radius: 8px; /* Mantén el borde redondeado */
+}
+
+/* Flechas de navegación del slider */
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.5em;
+    border-radius: 50%;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.slider-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slider-arrow.left {
+    left: 10px;
+}
+
+.slider-arrow.right {
+    right: 10px;
+}
+
+/* Indicadores de puntos */
+.slider-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dot.active {
+    background-color: #f08080; /* Color principal de tu boutique */
+    transform: scale(1.2);
+}
+
+/* Ajuste para las miniaturas si aún las quieres, pero ahora cambiarán la imagen principal del slider */
+.product-thumbnail-gallery {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    justify-content: center; /* Centra las miniaturas */
+}
+.product-thumbnail-gallery img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 2px solid #eee; /* Aumenta el borde para mejor visibilidad */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.1s ease;
+}
+.product-thumbnail-gallery img.active-thumbnail {
+    border-color: #f08080;
+    transform: scale(1.05);
+}
+
+/* Media Queries para responsividad del slider */
+@media (max-width: 768px) {
+    .slider-images img {
+        height: 350px; /* Ajusta la altura en móviles */
+    }
+    .slider-arrow {
+        padding: 8px 12px;
+        font-size: 1.2em;
+    }
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo a {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #f08080;
+            text-decoration: none;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 30px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #f08080;
+        }
+        .header-icons a {
+            color: #555;
+            margin-left: 20px;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+        .header-icons a:hover {
+            color: #f08080;
+        }
+
+        /* ----- ESTILOS ESPECÍFICOS PARA EL DETALLE DEL PRODUCTO (Basados en la imagen) ----- */
+        .product-section {
+            padding: 40px 0;
+            background-color: #fff;
+            margin: 40px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .product-images {
+            flex: 1;
+            min-width: 300px;
+            max-width: 50%; /* Ocupa la mitad del ancho en escritorio */
+        }
+        .product-main-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            object-fit: cover;
+            max-height: 600px; /* Para controlar la altura en pantallas grandes */
+        }
+        .product-thumbnail-gallery {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            overflow-x: auto; /* Para scroll horizontal si hay muchas miniaturas */
+            padding-bottom: 10px; /* Espacio para scrollbar */
+        }
+        .product-thumbnail-gallery img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: border-color 0.2s ease, transform 0.1s ease;
+        }
+        .product-thumbnail-gallery img:hover,
+        .product-thumbnail-gallery img.active-thumbnail {
+            border-color: #f08080;
+            transform: scale(1.05);
+        }
+
+        .product-details {
+            flex: 1;
+            min-width: 300px;
+        }
+        .product-details h1 {
+            font-size: 2.8em;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .product-rating {
+            color: #FFD700; /* Color de estrellas */
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .product-price {
+            font-size: 2.2em;
+            color: #f08080;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .product-description {
+            font-size: 1.1em;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .product-options {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .option-group {
+            margin-bottom: 20px;
+        }
+        .option-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 1.1em;
+        }
+        .option-group select,
+        .option-group input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            background-color: #fff;
+            appearance: none; /* Eliminar estilo nativo del select */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M287%2C197.3L159.2%2C69.5c-3.2-3.2-8.3-3.2-11.5%2C0L5.4%2C197.3c-3.2%2C3.2-3.2%2C8.3%2C0%2C11.5l15.3%2C15.3c3.2%2C3.2%2C8.3%2C3.2%2C11.5%2C0L144.5%2C118.8c3.2-3.2%2C8.3-3.2%2C11.5%2C0l112.3%2C112.3c3.2%2C3.2%2C8.3%2C3.2%2C11.5%2C0l15.3-15.3c3.2-3.2%2C3.2-8.3%2C0-11.5L287%2C197.3z%22%2F%3E%3C%2Fsvg%3E'); /* Flecha personalizada */
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px;
+        }
+        .option-group input[type="number"] {
+            width: 80px; /* Ancho más pequeño para cantidad */
+            text-align: center;
+            -moz-appearance: textfield; /* Para Firefox */
+        }
+        /* Ocultar flechas en input number para Chrome/Safari */
+        .option-group input[type="number"]::-webkit-outer-spin-button,
+        .option-group input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .color-options {
+            display: flex;
+            flex-wrap: wrap; /* Permite que los colores salten de línea */
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #ccc;
+            transition: border-color 0.2s ease, transform 0.1s ease;
+        }
+        .color-option.selected {
+            border-color: #f08080;
+            transform: scale(1.1);
+        }
+        .color-option[data-out-of-stock="true"] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            border: 2px dashed #dc3545; /* Borde rojo punteado para indicar fuera de stock */
+            position: relative;
+        }
+        .color-option[data-out-of-stock="true"]::after {
+            content: 'x'; /* Una 'x' simple para indicar agotado */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+
+        .stock-message {
+            font-weight: bold;
+            margin-top: 10px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .stock-message.in-stock {
+            color: #28a745; /* Verde para en stock */
+            background-color: #e6ffe6;
+            border: 1px solid #28a745;
+        }
+
+        .stock-message.out-of-stock {
+            color: #dc3545; /* Rojo para sin stock */
+            background-color: #ffe6e6;
+            border: 1px solid #dc3545;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px; /* Mantener flex para futuras expansiones */
+            margin-top: 30px;
+        }
+        .add-to-cart-btn {
+            flex: 1; /* Ocupa todo el espacio disponible */
+            padding: 15px 25px;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #f08080;
+            color: #fff;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .add-to-cart-btn:hover {
+            background-color: #e96363;
+            transform: translateY(-2px);
+        }
+        .add-to-cart-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Mensaje de confirmación de añadir al carrito */
+        .add-to-cart-confirmation {
+            background-color: #4CAF50; /* Un verde similar a "Comprar Ahora" pero como confirmación */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            display: none; /* Oculto por defecto */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .add-to-cart-confirmation.show {
+            display: block;
+            opacity: 1;
+        }
+
+
+        /* Información adicional (Ej. SKU, Categoría, Etiquetas) */
+        .additional-info {
+            margin-top: 30px;
+            font-size: 0.95em;
+            color: #777;
+            line-height: 1.8;
+        }
+        .additional-info span {
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* Mensaje de carga/error */
+        #product-detail-message {
+            text-align: center;
+            font-size: 1.2em;
+            color: #777;
+            margin-top: 50px;
+        }
+
+        /* Sección de productos relacionados (mantener) */
+        .related-products {
+            margin-top: 60px;
+            padding: 40px 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .related-products h2 {
+            text-align: center;
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .related-products h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #f08080;
+            margin: 10px auto 0;
+        }
+
+        .related-products .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .related-products .product-card {
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .related-products .product-card > a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .related-products .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .related-products .product-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid #eee;
+        }
+
+        .related-products .product-card h3 {
+            font-size: 1.2em;
+            margin: 15px 10px 8px;
+            color: #333;
+        }
+
+        .related-products .product-card p {
+            font-size: 1em;
+            color: #f08080;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .related-products .product-card .btn-primary {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #f08080;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: auto;
+        }
+
+        .related-products .product-card .btn-primary:hover {
+            background-color: #e96363;
+        }
+
+        /* Footer styles (mantener consistencia con category.html) */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+            font-size: 0.9em;
+        }
+        footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+        .footer-column h4 {
+            font-size: 1.2em;
+            color: #f08080;
+            margin-bottom: 15px;
+        }
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        .social-icons a {
+            color: #fff;
+            font-size: 1.5em;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: #f08080;
+        }
+        .newsletter-form {
+            display: flex;
+            margin-top: 10px;
+        }
+        .newsletter-form input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+            width: 70%;
+        }
+        .newsletter-form button {
+            padding: 10px 15px;
+            background-color: #f08080;
+            color: #fff;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .newsletter-form button:hover {
+            background-color: #e96363;
+        }
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #555;
+            padding-top: 20px;
+            margin-top: 30px;
+            color: #ccc;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .product-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .product-images,
+            .product-details {
+                min-width: unset;
+                max-width: 100%;
+            }
+            .product-details h1 {
+                font-size: 2.2em;
+            }
+            .product-price {
+                font-size: 1.8em;
+            }
+            .action-buttons {
+                flex-direction: column;
+            }
+            .related-products .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+
+        /* Estilos de las estrellas */
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    font-size: 2rem;
+    color: #ccc;
+    cursor: pointer;
+    width: fit-content;
+}
+.rating input {
+    display: none;
+}
+.rating label {
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.2s;
+}
+.rating label:hover,
+.rating label:hover ~ label {
+    color: #f7d800; /* Color de las estrellas al pasar el ratón */
+}
+.rating input:checked ~ label {
+    color: #f7d800; /* Color de las estrellas seleccionadas */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="inicio.html">
+                    <img id="site-logo" src="img/logo.png" alt="Logo de Tu Boutique">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="inicio.html">Inicio</a></li>
+                    <li><a href="category.html">Tienda</a></li>
+                    <li><a href="campaigns.html">Próximas Campañas</a></li>
+                    <li><a href="about_us.html">Nosotros</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="fas fa-heart"></i></a>
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+                </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="container product-section">
+            <div id="product-detail-message" style="display: none;"></div>
+            <div class="product-container">
+                <div class="product-images">
+                    <div class="product-main-image">
+                        <img id="mainProductImage" src="" alt="Imagen principal del producto">
+                    </div>
+                    <div class="product-thumbnail-gallery">
+                        </div>
+                </div>
+                <div class="product-details">
+                    <h1>Nombre del Producto</h1>
+                    <div class="product-rating">
+    <p>Calificación:</p>
+    <div class="rating" id="productRating">
+        <input type="radio" id="star5" name="rating" value="5" /><label for="star5">★</label>
+        <input type="radio" id="star4" name="rating" value="4" /><label for="star4">★</label>
+        <input type="radio" id="star3" name="rating" value="3" /><label for="star3">★</label>
+        <input type="radio" id="star2" name="rating" value="2" /><label for="star2">★</label>
+        <input type="radio" id="star1" name="rating" value="1" /><label for="star1">★</label>
+    </div>
+</div>
+                    <p class="product-price">$99.99</p>
+                    <p class="product-description">Descripción breve del producto.</p>
+
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label for="productSize">Talla:</label>
+                            <select id="productSize">
+                                </select>
+                        </div>
+                        <div class="option-group">
+                            <label>Color:</label>
+                            <div class="color-options">
+                                </div>
+                        </div>
+                        <div class="option-group">
+                            <label for="productQuantity">Cantidad:</label>
+                            <input type="number" id="productQuantity" value="1" min="1">
+                        </div>
+                        <p class="stock-message" id="stockMessage"></p>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="add-to-cart-btn">Añadir al Carrito</button>
+                    </div>
+                    <div class="add-to-cart-confirmation">
+                        <i class="fas fa-check-circle"></i> ¡Producto añadido al carrito!
+                    </div>
+
+                    <div class="additional-info">
+                        <p>SKU: <span id="product-sku"></span></p>
+                        <p>Categoría: <span id="product-category"></span></p>
+                        <p>Etiquetas: <span id="product-tags"></span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container related-products">
+            <h2>También te podría interesar</h2>
+            <div class="product-grid">
+                <div class="product-card" data-id="related01">
+                    <a href="product_detail.html?id=related01">
+                        <img src="img/blusa.jpg" alt="Blusa Elegante">
+                        <h3>Blusa Elegante</h3>
+                        <p>$35.00</p>
+                    </a>
+                    <button class="btn-primary add-to-cart-related-btn">Añadir al Carrito</button>
+                </div>
+                <div class="product-card" data-id="related02">
+                    <a href="product_detail.html?id=related02">
+                        <img src="img/pantalon lino.jpg" alt="Pantalón Casual">
+                        <h3>Pantalón Casual</h3>
+                        <p>$45.00</p>
+                    </a>
+                    <button class="btn-primary add-to-cart-related-btn">Añadir al Carrito</button>
+                </div>
+                <div class="product-card" data-id="related03">
+                    <a href="product_detail.html?id=related03">
+                        <img src="img/tacon.jpg" alt="Zapatos de Tacón">
+                        <h3>Zapatos de Tacón</h3>
+                        <p>$60.00</p>
+                    </a>
+                    <button class="btn-primary add-to-cart-related-btn">Añadir al Carrito</button>
+                </div>
+                <div class="product-card" data-id="related04">
+                    <a href="product_detail.html?id=related04">
+                        <img src="img/bolso.jpg" alt="Bolso de Moda">
+                        <h3>Bolso de Moda</h3>
+                        <p>$55.00</p>
+                    </a>
+                    <button class="btn-primary add-to-cart-related-btn">Añadir al Carrito</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+    <div class="container">
+        <div class="footer-column">
+            <h4>Tu Boutique</h4>
+            <ul>
+                <li><a href="#">Nosotros</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Tiendas Físicas</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+    <h4>Atención al Cliente</h4>
+    <ul>
+        <li><a href="#">Contacto</a></li>
+        <li><a href="#">Preguntas Frecuentes</a></li>
+        <li><a href="#">Envíos</a></li>
+        <li><a href="#">Devoluciones y Cambios</a></li>
+    </ul>
+    <a href="paginaslegales.html" class="btn-legal">Páginas Legales</a>
+</div>
+        <div class="footer-column">
+            <h4>Síguenos</h4>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Newsletter</h4>
+            <p>Suscríbete para ofertas y novedades.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Tu correo electrónico">
+                <button type="submit">Suscribir</button>
+            </form>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2025 Tu Boutique. Todos los derechos reservados.</p>
+    </div>
+</footer>
+  <script src="js/script2.js"></script>
+    
+</body>
+</html>

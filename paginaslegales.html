@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Páginas Legales - A boutique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+
+        /* Estilos para el logo de la cabecera */
+        .logo img {
+            height: 100px; /* Ajusta la altura de tu logo según sea necesario */
+            width: auto; /* Mantiene la proporción de la imagen */
+            vertical-align: middle; /* Alinea la imagen verticalmente con el texto si hubiera */
+        }
+        /* Base Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #fff;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #f08080;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-icons a {
+            color: #555;
+            font-size: 1.2em;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .header-icons a:hover {
+            color: #f08080;
+        }
+
+        /* Legal Content Section */
+        .legal-content-wrapper {
+            margin: 50px auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            font-size: 1em;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background-color: #f08080;
+            color: #fff;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        h1, h2 {
+            color: #2c3e50;
+            transition: color 0.3s ease;
+        }
+        h1 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-top: 25px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            transition: border-color 0.3s ease;
+        }
+        h3 {
+            color: #4a6c8e;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .disclaimer-box {
+            background-color: #ffeeba;
+            border: 1px solid #ffcc00;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            color: #665c00;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 50px;
+            transition: background-color 0.3s ease;
+        }
+
+        footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            text-align: left;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin: 20px;
+        }
+
+        .footer-column h4 {
+            color: #f08080;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 1.5em;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #f08080;
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            font-size: 0.9em;
+        }
+        
+        /* --- Modo Claro/Oscuro Styles --- */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "\f185";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            color: #f08080;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #f08080;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #f08080;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+            content: "\f186";
+            color: #333;
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+
+        body.dark-mode header {
+            background-color: #2b2b2b;
+            border-bottom-color: #444;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        body.dark-mode .logo a {
+            color: #f0f0f0;
+        }
+
+        body.dark-mode nav ul li a {
+            color: #cccccc;
+        }
+
+        body.dark-mode nav ul li a:hover {
+            color: #f08080;
+        }
+
+        body.dark-mode .header-icons a {
+            color: #cccccc;
+        }
+
+        body.dark-mode .header-icons a:hover {
+            color: #f08080;
+        }
+
+        body.dark-mode .legal-content-wrapper {
+            background-color: #2b2b2b;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        body.dark-mode .nav-links a {
+            color: #92b0d5;
+        }
+        body.dark-mode .nav-links a:hover,
+        body.dark-mode .nav-links a.active {
+            background-color: #f08080;
+            color: #fff;
+        }
+
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3 {
+            color: #f0f0f0;
+        }
+        body.dark-mode h2 {
+            border-bottom-color: #555;
+        }
+        body.dark-mode .disclaimer-box {
+            background-color: #3e3e3e;
+            border: 1px solid #555;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode footer {
+            background-color: #2b2b2b;
+            border-top: 1px solid #444;
+        }
+
+        body.dark-mode footer .container {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .footer-column h4 {
+            color: #f08080;
+        }
+
+        body.dark-mode .footer-column ul li a {
+            color: #cccccc;
+        }
+
+        body.dark-mode .footer-column ul li a:hover {
+            color: #f08080;
+        }
+
+        body.dark-mode .social-icons a {
+            color: #cccccc;
+        }
+
+        body.dark-mode .social-icons a:hover {
+            color: #f08080;
+        }
+        
+        body.dark-mode .copyright p {
+            color: #cccccc;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            header .container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .logo {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+
+            .header-icons {
+                width: 100%;
+                text-align: center;
+                margin-top: 15px;
+                gap: 15px;
+            }
+
+            .footer-column {
+                flex-basis: 100%;
+                margin: 15px 0;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="logo">
+                <a href="inicio.html">
+                    <img id="site-logo" src="img/logo.png" alt="Logo de Tu Boutique">
+                </a>
+            </div>
+        <nav>
+            <ul>
+                <li><a href="inicio.html">Inicio</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider round"></div>
+                </label>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container legal-content-wrapper">
+    <div class="nav-links">
+        <a href="#politicas" class="active" onclick="showContent('politicas', this)">POLÍTICAS DE PRIVACIDAD</a>
+        <a href="#terminos" onclick="showContent('terminos', this)">TÉRMINOS Y CONDICIONES</a>
+        <a href="#descargos" onclick="showContent('descargos', this)">DESCARGO DE RESPONSABILIDADES</a>
+        <a href="#copyright" onclick="showContent('copyright', this)">COPYRIGHT</a>
+    </div>
+
+    <div id="politicas" class="content-section active">
+        <h1>POLÍTICAS DE PRIVACIDAD</h1>
+        <h2>En A boutique, la privacidad de nuestros visitantes es de suma importancia para nosotros.</h2>
+        <p>Este documento de política de privacidad describe los tipos de información personal que se reciben y recopilan en A boutique y cómo se utiliza.</p>
+        
+        <h2>Archivos de registro</h2>
+        <p>Al igual que muchos otros sitios web, A boutique hace uso de archivos de registro. La información dentro de los archivos de registro incluye direcciones de protocolo de Internet (IP), tipo de navegador, proveedor de servicios de Internet (ISP), marca de fecha/hora, páginas de referencia/salida y número de clics para analizar tendencias, administrar el sitio, rastrear el movimiento del usuario alrededor del sitio y recopilar información demográfica. Las direcciones IP y otra información similar no están vinculadas a ninguna información que sea personalmente identificable.</p>
+        
+        <h2>Cookies y balizas web</h2>
+        <p>A boutique utiliza cookies para almacenar información sobre las preferencias de los visitantes, registrar información específica del usuario sobre qué páginas accede o visita, personalizar el contenido de la página web según el tipo de navegador de los visitantes u otra información que el visitante envíe a través de su navegador.</p>
+        
+        <h3>Cookie DART de DoubleClick</h3>
+        <p>Estos servidores de anuncios o redes de publicidad de terceros utilizan tecnología para enviar anuncios y enlaces que aparecen en Webcrafts Solutions directamente a Google, como proveedor de terceros, utiliza cookies para servir anuncios en A boutique.<br>
+        El uso por parte de Google de la cookie DART le permite mostrar anuncios a los usuarios basados en su visita a A boutique y otros sitios en Internet.<br>
+        Los usuarios pueden optar por no utilizar la cookie DART visitando la política de privacidad de la red de contenido y publicidad de Google en la siguiente URL: <a href="https://www.google.com/policies/privacy/" target="_blank">https://www.google.com/policies/privacy/</a>.<br>
+        sus navegadores. Automáticamente reciben su dirección IP cuando esto ocurre. También pueden usar otras tecnologías (como cookies, JavaScript o balizas web) para medir la efectividad de sus anuncios y/o personalizar el contenido publicitario que ven.</p>
+        <p>Webcrafts Solutions no tiene acceso ni control sobre estas cookies que son utilizadas por anunciantes de terceros.</p>
+        <p>Debe consultar las políticas de privacidad respectivas de estos servidores de anuncios de terceros para obtener información más detallada sobre sus prácticas, así como instrucciones sobre cómo optar por no participar en ciertas prácticas. La política de privacidad de Webcrafts Solutions no se aplica, y no podemos controlar las actividades de estos otros anunciantes o sitios web.</p>
+        <p>Si desea desactivar las cookies, puede hacerlo a través de las opciones individuales de su navegador. Puede encontrar información más detallada sobre la gestión de cookies con navegadores web específicos en los sitios web respectivos de los navegadores.</p>
+    </div>
+
+    <div id="terminos" class="content-section">
+        <h1>TÉRMINOS Y CONDICIONES</h1>
+        <p>Bienvenido a A boutique. Si continúas navegando y utilizando este sitio web, aceptas cumplir y quedar sujeto a los siguientes términos y condiciones de uso, que junto con nuestra política de privacidad, rigen la relación de Webcrafts Solutions contigo en relación con este sitio web.</p>
+        <p>El término Webcrafts Solutions o 'nosotros' o 'nos' se refiere al propietario del sitio web. El término 'tú' se refiere al usuario o espectador de nuestro sitio web. El uso de este sitio web está sujeto a los siguientes términos de uso:</p>
+        
+        <ul>
+            <li>El contenido de las páginas de este sitio web es solo para tu información general y uso. Está sujeto a cambios sin previo aviso.</li>
+            <li>Ni nosotros ni terceros proporcionamos ninguna garantía o garantía en cuanto a la precisión, puntualidad, rendimiento, integridad o idoneidad de la información y materiales encontrados u ofrecidos en este sitio web para un propósito particular. Reconoces que dicha información y materiales pueden contener inexactitudes o errores y excluimos expresamente la responsabilidad por tales inexactitudes o errores en la máxima medida permitida por la ley.</li>
+            <li>Tu uso de cualquier información o material en este sitio web es bajo tu propio riesgo, por lo que no seremos responsables. Será tu responsabilidad asegurarte de que cualquier producto, servicio o información disponible a través de este sitio web satisfaga tus requisitos específicos.</li>
+            <li>Este sitio web contiene material que es propiedad o está autorizado por nosotros. Este material incluye, entre otros, el diseño, la disposición, la apariencia y los gráficos. Se prohíbe la reproducción, salvo de acuerdo con el aviso de copyright, que forma parte de estos términos y condiciones.</li>
+            <li>Todas las marcas registradas reproducidas en este sitio web, que no son propiedad del operador o están autorizadas por éste, son reconocidas en el sitio web.</li>
+            <li>El uso no autorizado de este sitio web puede dar lugar a una reclamación por daños y perjuicios y/o constituir un delito.</li>
+            <li>De vez en cuando, este sitio web puede incluir enlaces a otros sitios web. Estos enlaces se proporcionan para tu conveniencia para proporcionar más información. No significan que respaldemos el(los) sitio(s) web. No tenemos responsabilidad por el contenido del sitio web(s) vinculado(s).</li>
+            <li>No puedes crear un enlace a este sitio web desde otro sitio web o documento sin el consentimiento previo por escrito de A boutique.</li>
+        </ul>
+    </div>
+
+    <div id="descargos" class="content-section">
+        <h1>DESCARGO DE RESPONSABILIDADES</h1>
+        <div class="disclaimer-box">
+            <p>Al utilizar esta función, aceptas este descargo de responsabilidad.</p>
+            <ul>
+                <li>Estas plantillas se te proporcionan para que comprendas mejor tus obligaciones, pero NO están destinadas a constituir una relación cliente-abogado o asesoramiento legal personalizado.</li>
+                <li>El desarrollador no es elegible para ningún reclamo o acción basada en cualquier información o funcionalidad proporcionada por este complemento.</li>
+                <li>Expresamente renunciamos a toda responsabilidad con respecto al uso de este complemento o sus funciones.</li>
+                <li>Este complemento te proporciona información general y herramientas, pero NO está destinado a servir como un paquete completo de cumplimiento.</li>
+                <li>Dado que cada negocio y situación es única, es posible que necesites modificar, agregar o eliminar información en estas plantillas.</li>
+                <li>Esta información se proporciona sólo para ayudarte a comenzar.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="copyright" class="content-section">
+        <h1>COPYRIGHT</h1>
+        <p>Este sitio web y su contenido tienen derechos de autor de Webcrafts Solutions - © Webcrafts Solutions 2024. Todos los derechos reservados.</p>
+        <p>Cualquier distribución o reproducción total o parcial del contenido en cualquier forma está prohibida, excepto lo siguiente:</p>
+        <ul>
+            <li>Puedes imprimir o descargar extractos en un disco duro local para tu uso personal y no comercial únicamente.</li>
+            <li>Puedes copiar el contenido para terceros individuales para su uso personal, pero solo si reconoces el sitio web como la fuente del material.</li>
+        </ul>
+        <p>No puedes, excepto con nuestro permiso expreso por escrito, distribuir o explotar comercialmente el contenido. Tampoco puedes transmitirlo o almacenarlo en cualquier otro sitio web o forma de sistema de recuperación electrónico.</p>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-column">
+            <h4>Sobre Nosotros</h4>
+            <p>A boutique ofrece soluciones digitales innovadoras para impulsar tu negocio.</p>
+        </div>
+        <div class="footer-column">
+            <h4>Enlaces Rápidos</h4>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Síguenos</h4>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>© 2024 A boutique. Todos los derechos reservados.</p>
+    </div>
+</footer>
+<script src="js/script.js"></script>
+<script>
+    const toggleSwitch = document.getElementById('checkbox');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme) {
+        document.body.classList.add(currentTheme);
+        if (currentTheme === 'dark-mode') {
+            toggleSwitch.checked = true;
+        }
+    }
+
+    function switchTheme(e) {
+        if (e.target.checked) {
+            document.body.classList.remove('light-mode');
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+            document.body.classList.add('light-mode');
+            localStorage.setItem('theme', 'light-mode');
+        }
+    }
+
+    toggleSwitch.addEventListener('change', switchTheme, false);
+
+    function showContent(id, element) {
+        // Oculta todas las secciones
+        const sections = document.querySelectorAll('.content-section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+
+        // Muestra la sección correspondiente al ID
+        const activeSection = document.getElementById(id);
+        if (activeSection) {
+            activeSection.classList.add('active');
+        }
+
+        // Remueve la clase 'active' de todos los enlaces
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+        });
+
+        // Agrega la clase 'active' al enlace clickeado
+        element.classList.add('active');
+    }
+
+    // Muestra la primera sección al cargar la página
+    document.addEventListener("DOMContentLoaded", function() {
+        const firstLink = document.querySelector('.nav-links a');
+        const firstSection = document.querySelector('.content-section');
+        if (firstLink && firstSection) {
+            firstLink.classList.add('active');
+            firstSection.classList.add('active');
+        }
+    });
+
+</script>
+
+</body>
+</html>
